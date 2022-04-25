@@ -1,10 +1,15 @@
 from cmath import inf
-from msilib import sequence
+
 import string
+
+EASY = "vigerene_easy_encrypted.txt"
+MEDIUM = "vigerne_medium_encrypt.txt"
+HARD = "vigerene_hard_encrypt.txt"
+
 
 
 lines = ""
-with open('vigerne_medium_encrypt.txt',encoding="utf8") as f:
+with open(HARD,encoding="utf8") as f:
     lines = f.readlines()
 
 
@@ -116,13 +121,14 @@ for x in range(2, 20):
     avg = avg / len(sequences)
     
     
-    if x == 9:
+    if x == 13:
         ans_sequences = sequences
     """ print(x)
     print(avg) """
     
     #Find out highest IOC = 5 or 10 for easy
     #9 for medium
+    #13 for hard
     
 
 
@@ -157,11 +163,16 @@ print(ans)
         
 #Decryption
 
-with open('vigerene_medium_encrypt.txt',encoding="utf8") as f:
+with open(HARD,encoding="utf8") as f:
     lines = f.readlines()
+temp = ""
+for x in lines:
+    
+    temp += x
+lines[0] = temp
 line = lines[0]
 line = line.lower()
-print(line)
+
 
 decrypted_text = ""
 count = 0
