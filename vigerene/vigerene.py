@@ -57,7 +57,6 @@ ALPHABET = string.ascii_lowercase
 
 
 
-
 def decryption(encrypt_letter, n):
     return chr((ord(encrypt_letter) - n - 97) % 26 + 97)
 

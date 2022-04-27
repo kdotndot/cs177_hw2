@@ -4,8 +4,12 @@ lines = ""
 #For easy, key = 26 - 18 = 8
 #For hard, key = 26 - 6 = 20
 #For hard2, key = 26 - 23 = 3
+EASY = "caesar_easy_encrypted.txt"
+EASY2 = "caesar_easy_2_encrypted.txt"
+HARD = "caesar_hard_encrypt.txt"
+HARD2 = "caesar_hard_2_encrypt.txt"
 #https://www.geeksforgeeks.org/caesar-cipher-in-cryptography/
-with open('caesar_hard_2_encrypt.txt') as f:
+with open(HARD2) as f:
     lines = f.readlines()
 
 line = lines[0]

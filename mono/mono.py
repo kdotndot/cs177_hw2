@@ -1,6 +1,7 @@
+
 from cmath import inf
 import string
-
+ 
 EASY = "mono_easy_encrypt.txt"
 MEDIUM = "mono_medium_encrypt.txt"
 freq_in_english = {'a' : 8.15,
@@ -33,7 +34,7 @@ freq_in_english = {'a' : 8.15,
 ALPHABET = string.ascii_lowercase
 def split(word):
     return [char for char in word]
-
+ 
 ALPHABET = split(ALPHABET)
 #Removing known transformations
 ALPHABET.remove("f")
@@ -56,8 +57,8 @@ ALPHABET.remove("n")
 ALPHABET.remove("u")
 ALPHABET.remove("k")
 ALPHABET.remove("z")
-
-
+ 
+ 
 def freq_find(sequence):
     freq = {}
     N = 0
@@ -68,25 +69,25 @@ def freq_find(sequence):
             else:
                 freq[x] += 1
             N += 1
-    
+   
     return freq, N
-
+ 
 def chi_squared(freq, N):
     chi_squared = 0
-    
+   
     for x in range(0,len(ALPHABET)):
         letter = ALPHABET[x]
-        if letter in freq: 
+        if letter in freq:
             chi_squared += pow(freq[letter] - (freq_in_english[letter] * N / 100) , 2) / ((freq_in_english[letter] * N / 100))
-        
+       
     return chi_squared
-
-
+ 
+ 
 lines = ""
 with open(EASY,encoding="utf8") as f:
     lines = f.readlines()
-
-
+ 
+ 
 #Simple txt parsing
 temp = ""
 for x in lines:
@@ -98,8 +99,8 @@ line = lines[0]
 line = line.lower()
 freq, N = freq_find(line)
 freq["v"] = 0
-N += 1
-
+ 
+ 
 #Removing known transformations
 freq.pop("u")
 freq.pop("b")
@@ -121,19 +122,19 @@ freq.pop("i")
 freq.pop("w")
 freq.pop("m")
 freq.pop("e")
-
-
-
-
-
+ 
+ 
+ 
+ 
+ 
 #Comparing english letter frequencies and picking highest chi_squared value
 ans = {}
-
+ 
 for x in freq:
     min_chi = inf
     key = ""
     print(x)
-    
+   
     for y in range(0,len(ALPHABET)):
         chi_square = pow(freq[x] - (freq_in_english[ALPHABET[y]] * N / 100) , 2)
         if chi_square < min_chi:
@@ -143,10 +144,10 @@ for x in freq:
     ans[x] = key    
     ALPHABET.remove(key)
     print("")
-
-
-
-
+ 
+ 
+ 
+#Confirmed answer keys
 ans["u"] = "f"
 ans["b"] = "e"
 ans["l"] = "i"
@@ -165,15 +166,13 @@ ans["q"] = "p"
 ans["k"] = "t"
 ans["i"] = "n"
 ans["w"] = "u"
-
 ans["m"] = "k"
 ans["e"] = "z"
-
 print(ans)
-
+ 
 #Decryption
 #U = F, B = E, U = T, J = L, C = V, N = G, X = H, G = R, F = S
-
+ 
 with open(EASY,encoding="utf8") as f:
     lines = f.readlines()
 temp = ""
@@ -182,10 +181,10 @@ for x in lines:
 lines[0] = temp
 line = lines[0]
 line = line.lower()
-
-
+ 
+ 
 decrypted_text = ""
-
+ 
 for x in range(len(line)):
     letter = line[x]
     temp = ""
@@ -194,5 +193,12 @@ for x in range(len(line)):
         decrypted_text += temp
     else:
         decrypted_text += letter
+
 print(decrypted_text)
 
+
+print(ans)
+flipped = dict((v,k) for k,v in ans.items())
+
+sorted_dict = {key: value for key, value in sorted(flipped.items())}
+print(sorted_dict)
